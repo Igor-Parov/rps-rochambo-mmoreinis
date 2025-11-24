@@ -7,6 +7,13 @@ var scoreBoard = document.getElementById("scoreBoard");
 var moveWords = ["rock", "paper", "scissors"];
 var moves = ["r", "p", "s"];
 
+
+/* function main()
+ * runs the whole program
+ * @param none
+ * @return none
+ */
+ 
 function main() {
    document.getElementById("playButton"). style.display = "none";
    let instructions = document.createElement("p");
@@ -20,12 +27,20 @@ function main() {
    roundsButton.addEventListener("click", setRounds);
    board.appendChild(roundsButton);
 }
-
+/* function setRounds()
+ * calls scoreBoard and sets how many rounds should be in game
+ * @param none
+ * @return none
+ */
 function setRounds() {
    rounds = parseInt(document.getElementById("roundsBox").value);
    buildScoreBoard();
 }
-
+/* function buildScoreBoard()
+ * shows how many rounds is there and which round is now played, shows the score of each person
+ * @param none
+ * @return none
+ */
 function buildScoreBoard(){
    let roundNumber = document.createElement("p");
    roundNumber.id="roundNumber";
@@ -34,7 +49,11 @@ function buildScoreBoard(){
    addScoreBox("player", "Player", 0);
    addScoreBox("computer", "Computer", 1);
 }
-
+/* function addScoreBox
+ * writes what the score is for each one
+ * @param (entity, entityLabel, index){
+ * @return none
+ */
 function addScoreBox(entity, entityLabel, index){
    let myDiv = document.createElement("div");
    myDiv.id = entity;
@@ -42,14 +61,22 @@ function addScoreBox(entity, entityLabel, index){
    scoreBoard.appendChild(myDiv);
    buildConsole();
 }
-
+/* function buildConsole()
+ * adds buttons of choice for the player 
+ * @param none
+ * @return none
+ */
 function buildConsole() { 
    board.innerHTML = "";
    addPlayButton("rock", "r");
    addPlayButton("paper", "p");
    addPlayButton("scissors","s");
 }
-
+/* function addPlayButton(hand, move)
+ * calculates what button the user pressed and calls for computer choice and displays the buttons 
+ * @param hand, move
+ * @return none
+ */
 function addPlayButton(hand, move){
     let playButton = document.createElement("button");
     playButton.id=hand;
@@ -60,7 +87,11 @@ function addPlayButton(hand, move){
     playButton.className="move"
     board.appendChild(playButton);
 }
-
+/* function cpuTurn(u)
+ * makes a random move for computer and calculates who won the round, and checks if the ychose the same thing
+ * @param u
+ * @return none
+ */
 function cpuTurn(u) {
    let turn = Math.floor(Math.random() * 3);
    c = moves[turn];
@@ -76,7 +107,11 @@ function cpuTurn(u) {
       let message = "You chose " + u + " and I chose " + cmove + " so " + winner + " won!";      makePopUp(message, updateScore(winner));
    }
 }
-
+/* function makePopUp(message,target)
+ * shows up if they entered the same thing 
+ * @param (message,target)
+ * @return none
+ */
 function makePopUp(message,target){
    let popup = document.createElement("div");
    popup.id="popup";
@@ -88,12 +123,20 @@ function makePopUp(message,target){
    popup.appendChild(popP);
    document.body.insertBefore(popup, board);
 }
-
+/* function closePopup(target)
+ * closes that popUp
+ * @param (target)
+ * @return none
+ */
 function closePopup(target){
    document.getElementById("popup").remove();
    target;
 }
-
+/* function updateScore(winner)
+ * Gives 1 score to a winner 
+ * @param winner
+ * @return none
+ */
 function updateScore(winner) {
    if (winner == "I") score[1]++;
    else score[0]++;
@@ -102,7 +145,11 @@ function updateScore(winner) {
    // What if we are out of rounds?
    buildScoreBoard();
 }
-
+/* function findWinner(combo)
+ * finds a winner of a round and returns it
+ * @param combo
+ * @return winner
+ */
 function findWinner(combo) {
    let match = "";
    let winner = "";
@@ -122,7 +169,11 @@ function findWinner(combo) {
    }
    return winner;
 }
-
+/* function finalWinner()
+ * Says who is the winner after all the rounds
+ * @param none
+ * @return endWinner
+ */
 function finalWinner() {
    let endWinner = "";
    if (score[0] > score[1]) endWinner = "You";
